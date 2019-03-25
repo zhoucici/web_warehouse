@@ -8,10 +8,10 @@
         <div class="dt-filter-left">
             <el-form :inline="true" size="mini">
                 <el-form-item>
-                    <el-button @click="" type="primary" icon="el-icon-plus">添加用户</el-button>
+                    <el-button @click="abc()" type="primary" icon="el-icon-plus">添加用户</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button @click=""  type="warning" icon="el-icon-edit">修改状态</el-button>
+                    <el-button @click="abc()"  type="warning" icon="el-icon-edit">修改状态</el-button>
                 </el-form-item>
             </el-form>
 
@@ -22,7 +22,7 @@
                     <el-input size="mini" v-model="keywords" placeholder="品名/姓名/管理者" style="width: 180px;"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button class="dtc-search" @click="" type="primary" icon="el-icon-search">搜索</el-button>
+                    <el-button class="dtc-search" @click="abc()" type="primary" icon="el-icon-search">搜索</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -143,6 +143,10 @@ export default {
     return {
       ab: '',
       keywords: ''
+    }
+  },
+  methods: {
+    abc () {
     }
   }
 }

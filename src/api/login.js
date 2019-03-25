@@ -6,7 +6,7 @@ export function loginByUsername (username, password) {
     password
   }
   return request({
-    url: 'http://127.0.0.1:8080',
+    url: '/api/login',
     method: 'post',
     data
   })

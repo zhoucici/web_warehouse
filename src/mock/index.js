@@ -1,5 +1,11 @@
 const Mock = require('mockjs')
-Mock.mock('/login/login', 'post', {
-  state: 1,
-  msg: '登录成功'
-})
+const login = function () {
+  return {
+    code: 1,
+    mes: '登录成功',
+    data: {
+      username: '测试管理员'
+    }
+  }
+}
+Mock.mock('/api/login', 'post', login)

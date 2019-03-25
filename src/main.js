@@ -9,7 +9,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-// require('@/mock')
+
+require('./mock/index')
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
@@ -18,7 +19,7 @@ router.beforeEach((to, from, next) => {
     if (sessionStorage.getItem('user')) {
       store.commit('SET_USER', JSON.parse(sessionStorage.getItem('user')))
     }
-    if (store.getters.user.user) {
+    if (store.getters.user._userinfo) {
       next()
     } else {
       next({

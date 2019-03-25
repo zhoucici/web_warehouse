@@ -173,7 +173,7 @@
           </div>
 
           <div class="dt-header-user">
-              <div class="dt-user-name" id="userName">{{adminName}}，你好</div>
+              <div class="dt-user-name" id="userName">{{_userinfo.username}}，你好</div>
 
               <div class="dt-login-out dt-button-pointer" onclick="backLoginOut()">&nbsp;退出登录</div>
           </div>
@@ -240,6 +240,7 @@
 //         })
 //     }
 import $ from 'jquery'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -278,6 +279,9 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters(['_userinfo'])
   },
   created () {
     // getDataFromServer(this);

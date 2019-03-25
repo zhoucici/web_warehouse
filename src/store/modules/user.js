@@ -1,11 +1,11 @@
 import { loginByUsername, logout } from '../../api/login'
 const user = {
   state: {
-    user: ''
+    _userinfo: ''
   },
   mutations: {
     SET_USER: (state, token) => {
-      state.user = token
+      state._userinfo = token
     }
   },
   actions: {
@@ -13,6 +13,7 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
+          console.log(response)
           if (response.data.code === 1) {
             sessionStorage.setItem('user', JSON.stringify(response.data.data))
             commit('SET_USER', response.data.data)
