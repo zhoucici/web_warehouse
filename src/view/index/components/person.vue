@@ -8,9 +8,6 @@
         <div class="dt-filter-left">
             <el-form :inline="true" size="mini">
                 <el-form-item>
-                    <el-button @click="abc()" type="primary" icon="el-icon-plus">添加用户</el-button>
-                </el-form-item>
-                <el-form-item>
                     <el-button @click="abc()"  type="warning" icon="el-icon-edit">修改状态</el-button>
                 </el-form-item>
             </el-form>
@@ -22,104 +19,46 @@
                     <el-input size="mini" v-model="keywords" placeholder="品名/姓名/管理者" style="width: 180px;"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button class="dtc-search" @click="abc()" type="primary" icon="el-icon-search">搜索</el-button>
+                    <el-button class="dtc-search" @click="search()" type="primary" icon="el-icon-search">搜索</el-button>
+                    <el-button class="dtc-search" @click="clearsearch()" type="" icon="el-icon-error">清除搜索</el-button>
                 </el-form-item>
             </el-form>
         </div>
     </div>
     <el-table
-            ref="multipleTable"
-            :data="tableData"
+    v-loading='loading'
+            :data="tableDatalist"
             size="mini"
-            :fit="true"
-            @selection-change="selsChange">
-
+            >
         <el-table-column
-                width="60px"
-                prop="user_name"
-                label="全选"
-                type="selection">
+                prop="realName"
+                label="用户名"
+                width="100">
         </el-table-column>
         <el-table-column
                 prop="realName"
-                label="姓名"
+                label="使用者"
                 width="100">
-            <template slot-scope="scope">
-                ${scope.row.realName | noDataFormat}
-            </template>
-        </el-table-column>
-        <el-table-column
-                prop="residentId"
-                label="身份证号"
-                width="150">
-            <template slot-scope="scope">
-                ${scope.row.residentId | noDataFormat}
-            </template>
         </el-table-column>
         <el-table-column
                 prop="userPhone"
-                label="联系电话"
+                label="电话"
                 width="120px">
-            <template slot-scope="scope">
-                ${scope.row.userPhone | noDataFormat}
-            </template>
-        </el-table-column>
-        <el-table-column
-                prop="griddingName"
-                label="所属网格"
-                >
-            <template slot-scope="scope">
-                ${scope.row.griddingName | noDataFormat}
-            </template>
-        </el-table-column>
-        <el-table-column
-                prop="areaName"
-                label="所属片区"
-                >
-            <template slot-scope="scope">
-                ${scope.row.areaName | noDataFormat}
-            </template>
         </el-table-column>
         <el-table-column
                 prop="groupName"
-                label="所属小组"
+                label="所属部门"
         >
-            <template slot-scope="scope">
-                ${scope.row.groupName | noDataFormat}
-            </template>
         </el-table-column>
         <el-table-column
-                prop="userPoint"
-                label="积分"
-                width="100px">
-            <template slot-scope="scope">
-                ${scope.row.userPoint | noDataFormat}
-            </template>
-        </el-table-column>
-        <el-table-column
-                prop="isPartyMember"
-                label="是否入党"
-                width="100px">
-            <template slot-scope="scope">
-                ${scope.row.isPartyMember | PartyFilter}
-            </template>
+                prop="groupName"
+                label="权限控制"
+        >
         </el-table-column>
         <el-table-column
                 prop="userStatus"
                 label="状态"
                 width="100px">
-            <template slot-scope="scope">
-                ${scope.row.userStatus | StatusFilter}
-            </template>
-        </el-table-column>
-        <el-table-column
-                prop="areaName"
-                label="审核状态"
-                width="100px"
-        >
-            <template slot-scope="scope">
-                ${scope.row.villagerId | VillagerIdFilter}
-            </template>
         </el-table-column>
         <el-table-column
                 type="flex"
@@ -128,9 +67,8 @@
                 width="200px"
                 >
             <template slot-scope="scope">
-                <el-button type="primary" size="mini" @click="goToDetail(scope.row.userId)">详情</el-button>
-                <el-button type="success" size="mini" v-if="scope.row.villagerId==-2" @click="reviewVillager(scope.row.userId,scope.row.userPhone,1)">审核成功</el-button>
-                <el-button type="warning" size="mini" v-if="scope.row.villagerId==-2" @click="reviewVillager(scope.row.userId,scope.row.userPhone,0)">审核失败</el-button>
+                <el-button type="primary" size="mini" @click="goToDetail(scope.row.userId)">编辑</el-button>
+                <el-button type="primary" size="mini" @click="goToDetail(scope.row.userId)">删除</el-button>
             </template>
         </el-table-column>
 
@@ -138,15 +76,44 @@
   </div>
 </template>
 <script>
+import { Message } from 'element-ui'
 export default {
   data () {
     return {
+        loading:false,
       ab: '',
-      keywords: ''
+      searchdata:'',
+      searching:'',
+      keywords: '',
+      tableDatalist:[],  // 表格数据
+      nowpage:1,
+      total:0
     }
   },
+  created(){
+      this.getData()
+  },
   methods: {
-    abc () {
+    search () {
+        this.searching=this.searchdata
+        this.getData(1)
+    },
+    clearsearch(){
+        this.searching=''
+        this.searchdata=''
+        this.getData(1)
+    },
+    getData(page){
+        this.loading=true
+      let _data={
+        page: page||this.nowpage,
+        data: this.searching
+        }
+        this.$store.dispatch('GetUserTable', _data).then(res => {
+            this.loading=false
+            console.log(res);
+      }).catch(err => {
+      })
     }
   }
 }
