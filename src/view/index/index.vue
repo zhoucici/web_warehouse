@@ -173,7 +173,7 @@
           </div>
 
           <div class="dt-header-user">
-              <div class="dt-user-name" id="userName">{{_userinfo.username}}，你好</div>
+              <div class="dt-user-name" id="userName">{{_userinfo.name}}，你好</div>
 
               <div class="dt-login-out dt-button-pointer" onclick="backLoginOut()">&nbsp;退出登录</div>
           </div>
@@ -284,8 +284,6 @@ export default {
     ...mapGetters(['_userinfo'])
   },
   created () {
-    // getDataFromServer(this);
-    // getNnsolvedCountNum(this);
   },
   mounted () {
     $('.dtc-menu').css('height', ($(window).height() - 50) + 'px')

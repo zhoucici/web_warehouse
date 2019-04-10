@@ -16,6 +16,8 @@ const user = {
           console.log(response)
           if (response.data.code === 1) {
             sessionStorage.setItem('user', JSON.stringify(response.data.data))
+            console.log(response.data.data);
+            
             commit('SET_USER', response.data.data)
             resolve(response.data.mes)
           } else {

@@ -104,15 +104,16 @@ export default {
         this.getData(1)
     },
     getData(page){
-        this.loading=true
+        //this.loading=true
       let _data={
         page: page||this.nowpage,
         data: this.searching
         }
         this.$store.dispatch('GetUserTable', _data).then(res => {
+            console.log(res)
             this.loading=false
-            console.log(res);
       }).catch(err => {
+          this.loading=false
       })
     }
   }

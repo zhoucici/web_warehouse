@@ -6,7 +6,7 @@ export function getUserTable (page, text) {
     text
   }
   return request({
-    url: '/api/usertable',
+    url: '/usertable',
     method: 'post',
     data
   })
