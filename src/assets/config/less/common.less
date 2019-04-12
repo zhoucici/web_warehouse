@@ -1,0 +1,122 @@
+
+.tablebtn{
+    padding:4px;
+}
+.tabletag{
+    height: 22px;
+    line-height: 22px;
+}
+.font-btn{
+    cursor:pointer;
+    transition: .3s;
+    &.unclick{
+        cursor: not-allowed;
+        color: rgba(16, 30, 56, 0.6)
+    }
+    &.normal{
+        color: @g_fontbtn_n;
+        
+        &:hover{
+            color: @g_fontbtn_h;
+        }
+        &:active{
+            color: @g_fontbtn_a;
+        }
+    }
+    &.danger{
+        color: @g_fontbtnR_n;
+        
+        &:hover{
+            color: @g_fontbtnR_h;
+        }
+        &:active{
+            color: @g_fontbtnR_a;
+        }
+    }
+}
+
+
+// 通用按钮
+.z-btn{
+    @width:60px;
+    @height:32px;
+
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: @width;
+    height: @height;
+    text-align: center;
+    line-height: @height - 1;
+    padding: 0 7px;
+    color: @g_black;
+    background: #fff;
+    font-size: 14px;
+    border: 1px solid @g_border_c;
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+    border-radius: 2px;
+
+    &:hover{
+        background:#EFEFEF;
+    }
+    &:active{
+        background: @g_border_c;
+    }
+    &+.z-btn{
+        margin-left: 10px;
+    }
+
+    &.unclick{
+        cursor: not-allowed;
+
+    }
+
+    &.danger{
+        border-color: #FF5257;
+        background: #FF5257;
+        color:#fff;
+
+        &:hover{
+            border-color: rgba(255,82,87,0.6);
+            background: rgba(255,82,87,0.6);
+        }
+        &:active{
+            border-color: #D22327;
+            background: #D22327;
+        }
+    }
+
+    &.normal{
+        border-color: @g_Nbtn_n;
+        background: @g_Nbtn_n;
+        color:#fff;
+
+        &:hover{
+            border-color:rgba(0,161,255,0.6);
+            background:@g_Nbtn_h;
+        }
+        &:active{
+            border-color: #0085DC;
+            background: @g_Nbtn_a;
+        }
+    }
+
+}
+.el-date-editor{
+            display: inline-block;
+            width:125px;
+        }
+@img_w:30px;
+.reset{
+        color:#595959;
+        padding-left:@img_w + 16px;
+        position: relative;
+        margin: 30px 0 20px 40px;
+        img{
+            position: absolute;
+            left:0;
+            top:50%;
+            transform: translateY(-50%);
+        }
+    }

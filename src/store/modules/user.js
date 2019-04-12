@@ -1,4 +1,4 @@
-import { loginByUsername, logout } from '../../api/login'
+import { loginByUsername, getUserInfo } from '../../api/login'
 const user = {
   state: {
     _userinfo: ''
@@ -13,11 +13,8 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
-          console.log(response)
           if (response.data.code === 1) {
             sessionStorage.setItem('user', JSON.stringify(response.data.data))
-            console.log(response.data.data);
-            
             commit('SET_USER', response.data.data)
             resolve(response.data.mes)
           } else {
@@ -28,15 +25,17 @@ const user = {
         })
       })
     },
-    LogOut ({ commit, state }) {
-      return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
-          resolve()
-        }).catch(error => {
-          reject(error)
+    Logout({ commit, state }) {
+      sessionStorage.clear()
+      commit('SET_USER', '')
+    },
+    Getuserinfo({ commit },id){
+        getUserInfo(id)
+        .then(res=>{
+          console.log(res);
+          
+          commit('SET_USER', res.data[0])
         })
-      })
     }
   }
 }

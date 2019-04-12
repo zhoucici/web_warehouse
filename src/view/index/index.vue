@@ -145,6 +145,7 @@
     }
 
     .dt-login-out {
+      cursor:pointer;
         position: absolute;
         top: 0;
         right: 10px;
@@ -173,9 +174,9 @@
           </div>
 
           <div class="dt-header-user">
-              <div class="dt-user-name" id="userName">{{_userinfo.name}}，你好</div>
+              <div class="dt-user-name" id="userName">{{_userinfo.name}}，您好<span v-if="_userinfo.admin">,您是超级管理员</span> </div>
 
-              <div class="dt-login-out dt-button-pointer" onclick="backLoginOut()">&nbsp;退出登录</div>
+              <div class="dt-login-out dt-button-pointer" @click="logoutshow=true">&nbsp;退出登录</div>
           </div>
       </div>
 
@@ -202,7 +203,19 @@
               </el-scrollbar>
 
           </div>
-
+          <z-windowPop 
+            btnClass="danger"
+            savetext="确定"
+            :btnshow="true"
+            title="退出系统"
+            @confirm="backLoginOut()"
+            width='454px'
+            v-model="logoutshow">
+            <div class="reset">
+                <img src="../../assets/img/warn_icon.svg">
+                <div>您确定要退出吗</div>
+            </div>
+        </z-windowPop>
           <div class="dtc-content">
             <keep-alive>
               <router-view></router-view>
@@ -212,39 +225,11 @@
   </div>
 </template>
 <script>
-// var getDataFromServer = function (vmObj) {
-//         var args={
-//             "admin_id":vmObj.adminId
-//         };
-//         dt.get('/back/api/menu/getMenuList', args, function (res) {
-
-//             vmObj.tableData = res.data.menuList;
-//             vmObj.dataComplete = true;
-//         })
-//     };
-
-//     var getNnsolvedCountNum = function(vmObj){
-//         var args = {
-//             "startTime": "",
-//             "endTime": "",
-//             "disputeType": 0,
-//             "is_read": 100,
-//             "keyWord": "",
-//             "pageIndex": 1,
-//             "pageSize": 10,
-//             "adminId":adminId
-//         };
-//         dt.get('/back/api/policeService/getMediationList', args, function (res) {
-//             vmObj.unsolvedCountNum = res.data.unsolvedCountNum
-//             vmObj.total = res.data.count
-//         })
-//     }
-import $ from 'jquery'
 import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      adminName: '测试账号',
+      logoutshow:false,
       currentMenuId: '',
       tableData: [
         {
@@ -273,7 +258,7 @@ export default {
             {
               menuName: '出入记录',
               menuId: 202,
-              menuIcon: 'addperson'
+              menuIcon: 'record'
             }
           ]
         }
@@ -283,13 +268,42 @@ export default {
   computed: {
     ...mapGetters(['_userinfo'])
   },
-  created () {
+  watch:{
+    "$route"(to){
+        this.menuChange(to);
+			}
   },
+  created(){
+			this.menuChange(this.$route);
+      
+		},
   mounted () {
     $('.dtc-menu').css('height', ($(window).height() - 50) + 'px')
     $('.dtc-content').css('height', ($(window).height() - 80) + 'px')
   },
   methods: {
+    backLoginOut(){
+      this.$store.dispatch('Logout')
+      this.$router.push('/login')
+    },
+    menuChange(route){
+        let pathArr = route.fullPath.substring(1).split("/").map(str=>str.split('?')[0]);
+        switch (pathArr[0]){
+          case 'person':
+          this.currentMenuId=101;
+          break;
+          case 'addperson':
+          this.currentMenuId=102;
+          break;
+          case 'inventory':
+          this.currentMenuId=201;
+          break;
+          case 'record':
+          this.currentMenuId=202;
+          break;
+        }
+        
+    },
     chooseMenu (subMenuId, menuurl) {
       if (menuurl === '' || menuurl === '#') {
         this.$message.warning('功能建设中')
@@ -301,5 +315,11 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang='less' scoped>
+.logintext{
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+}
+
 </style>

@@ -12,17 +12,14 @@ export function loginByUsername (username, password) {
   })
 }
 
-export function logout () {
-  return request({
-    url: '/logout',
-    method: 'post'
-  })
-}
 
-export function getUserInfo (token) {
+export function getUserInfo (id) {
+  let data={
+    id
+  }
   return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
+    url: '/userinfo',
+    method: 'post',
+    data
   })
 }
