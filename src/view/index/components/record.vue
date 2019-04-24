@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    添加用户
+    出入记录
   </div>
 </template>
 
@@ -18,5 +18,5 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 </style>

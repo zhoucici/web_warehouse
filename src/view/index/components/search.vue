@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    添加用户
+    仓库查询
   </div>
 </template>
 

@@ -13,31 +13,31 @@ Vue.config.productionTip = false
 
 require('./mock/index')
 
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
   
-  if (to.path === '/login') {
-    sessionStorage.clear()
-    next()
-  } else {
+//   if (to.path === '/login') {
+//     sessionStorage.clear()
+//     next()
+//   } else {
 
-    if (sessionStorage.getItem('user')) {
-      store.commit('SET_USER', JSON.parse(sessionStorage.getItem('user')))
-    }else{
-      next({
-        path: '/login',
-      })
-    }
-    if (store.getters.user._userinfo) {
-      store.dispatch('Getuserinfo',store.getters.user._userinfo.id)
-      next()
-    } else {
-      next({
-        path: '/login',
-        query: {redirect: to.fullPath}
-      })
-    }
-  }
-})
+//     if (sessionStorage.getItem('user')) {
+//       store.commit('SET_USER', JSON.parse(sessionStorage.getItem('user')))
+//     }else{
+//       next({
+//         path: '/login',
+//       })
+//     }
+//     if (store.getters.user._userinfo) {
+//       store.dispatch('Getuserinfo',store.getters.user._userinfo.id)
+//       next()
+//     } else {
+//       next({
+//         path: '/login',
+//         query: {redirect: to.fullPath}
+//       })
+//     }
+//   }
+// })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

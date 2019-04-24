@@ -33,6 +33,14 @@ export default new Router({
         {
           path: '/addperson',
           component: resolve => require(['../view/index/components/addperson.vue'], resolve)
+        },
+        {
+          path: '/search',
+          component: resolve => require(['../view/index/components/search.vue'], resolve)
+        },
+        {
+          path: '/record',
+          component: resolve => require(['../view/index/components/record.vue'], resolve)
         }
       ]
     }

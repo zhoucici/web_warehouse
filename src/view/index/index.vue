@@ -253,7 +253,7 @@ export default {
             {
               menuName: '库存查询',
               menuId: 201,
-              menuIcon: 'person'
+              menuIcon: 'search'
             },
             {
               menuName: '出入记录',
