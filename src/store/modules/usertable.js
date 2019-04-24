@@ -1,4 +1,4 @@
-import { getUserTable,deleteuser,edituser} from '../../api/user'
+import { getUserTable,deleteuser,edituser,addperson} from '../../api/user'
 const usertable = {
   state: {
     _usertable: ''
@@ -35,6 +35,18 @@ const usertable = {
           reject(error)
         })
       })
+    },
+    Addperson({},user){
+      user.sys=this.state.user._userinfo.sys
+      user.quanx=user.quanx.join('')
+      return new Promise((resolve,reject) => {
+        addperson(user).then(response=>{
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+      
     }
   }
 }

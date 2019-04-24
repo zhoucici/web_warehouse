@@ -31,3 +31,13 @@ export function edituser (user) {
     data
   })
 }
+export function addperson (user) {
+  const data = {
+    user
+  }
+  return request({
+    url: '/adduser',
+    method: 'post', 
+    data
+  })
+}

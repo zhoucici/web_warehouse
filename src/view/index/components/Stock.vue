@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-breadcrumb style="margin-bottom: 10px;" separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-        <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+        <el-breadcrumb-item>仓库管理</el-breadcrumb-item>
+        <el-breadcrumb-item>库存管理</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="dt-filter-box">
         <div class="dt-filter-left">

@@ -32,7 +32,7 @@ const user = {
     Getuserinfo({ commit },id){
         getUserInfo(id)
         .then(res=>{
-          console.log(res);
+          
           
           commit('SET_USER', res.data[0])
         })

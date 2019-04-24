@@ -33,6 +33,10 @@ export default new Router({
         {
           path: '/addperson',
           component: resolve => require(['../view/index/components/addperson.vue'], resolve)
+        },
+        {
+          path: '/Stock',
+          component: resolve => require(['../view/index/components/Stock.vue'], resolve)
         }
       ]
     }

@@ -253,7 +253,7 @@ export default {
             {
               menuName: '库存查询',
               menuId: 201,
-              menuIcon: 'person'
+              menuIcon: 'Stock'
             },
             {
               menuName: '出入记录',
@@ -275,7 +275,6 @@ export default {
   },
   created(){
 			this.menuChange(this.$route);
-      
 		},
   mounted () {
     $('.dtc-menu').css('height', ($(window).height() - 50) + 'px')
@@ -295,7 +294,7 @@ export default {
           case 'addperson':
           this.currentMenuId=102;
           break;
-          case 'inventory':
+          case 'Stock':
           this.currentMenuId=201;
           break;
           case 'record':
