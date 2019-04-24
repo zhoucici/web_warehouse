@@ -35,12 +35,17 @@ export default new Router({
           component: resolve => require(['../view/index/components/addperson.vue'], resolve)
         },
         {
+<<<<<<< HEAD
           path: '/search',
           component: resolve => require(['../view/index/components/search.vue'], resolve)
         },
         {
           path: '/record',
           component: resolve => require(['../view/index/components/record.vue'], resolve)
+=======
+          path: '/Stock',
+          component: resolve => require(['../view/index/components/Stock.vue'], resolve)
+>>>>>>> 815c73431d04930c8596f0d617e4a4f02fbb56c0
         }
       ]
     }
