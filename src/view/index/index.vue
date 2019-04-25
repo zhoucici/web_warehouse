@@ -1,4 +1,13 @@
 <style>
+    #container-menu{
+        height: 100%;
+    }
+    .index-container{
+        height: calc( 100% - 50px );
+    }
+    .dtc-menu{
+        height: 100%;
+    }
     .el-table__row .el-button + .el-button {
         margin-left: 5px;
     }
@@ -180,7 +189,7 @@
           </div>
       </div>
 
-      <div>
+      <div class="index-container">
           <div class="dtc-menu">
               <el-scrollbar style="height: 100%">
                   <div class="parent-menu" v-for="(item,index) in tableData" :key="index">
@@ -277,8 +286,8 @@ export default {
 			this.menuChange(this.$route);
 		},
   mounted () {
-    $('.dtc-menu').css('height', ($(window).height() - 50) + 'px')
-    $('.dtc-content').css('height', ($(window).height() - 80) + 'px')
+    // $('.dtc-menu').css('height', ($(window).height() - 50) + 'px')
+    // $('.dtc-content').css('height', ($(window).height() - 80) + 'px')
   },
   methods: {
     backLoginOut(){

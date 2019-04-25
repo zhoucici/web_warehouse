@@ -4,20 +4,20 @@
             <el-breadcrumb-item>用户管理</el-breadcrumb-item>
             <el-breadcrumb-item>添加用户</el-breadcrumb-item>
         </el-breadcrumb>
-        <el-form ref="form" :model="form" label-width="80px" style="width:500px;">
-            <el-form-item label="账号">
+        <el-form ref="form" :model="form" :rules="rules" label-width="80px" style="width:500px;">
+            <el-form-item label="账号" prop="userId">
                 <el-input size="mini" v-model="form.userId" placeholder="请输入字母和数字"></el-input>
             </el-form-item>
-            <el-form-item label="密码">
-                <el-input size="mini" v-model="form.pwd" placeholder="请输入字母和数字"></el-input>
+            <el-form-item label="密码" prop="pwd">
+                <el-input type="password" size="mini" v-model="form.pwd" placeholder="请输入字母和数字"></el-input>
             </el-form-item>
-            <el-form-item label="使用者">
+            <el-form-item label="使用者" prop="name">
                 <el-input size="mini" v-model="form.name" placeholder="请输入使用者"></el-input>
             </el-form-item>
-            <el-form-item label="电话">
+            <el-form-item label="电话" prop="phone">
                 <el-input size="mini" v-model="form.phone" placeholder="请输入数字"></el-input>
             </el-form-item>
-            <el-form-item label="所属部门" >
+            <el-form-item label="所属部门" prop="belongto">
                 <el-input size="mini" v-model="form.belongto" placeholder="请输入所属部门"></el-input>
             </el-form-item>
             <el-form-item label="权限配置">
@@ -35,10 +35,10 @@
                 </el-radio-group>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">立即创建</el-button>
-                <el-button  @click="clear">取消</el-button>
+                <el-button type="primary" @click="onSubmit('form')">立即创建</el-button>
+                <el-button  @click="clear('form')">取消</el-button>
             </el-form-item>
-            </el-form>
+        </el-form>
     </div>
 </template>
 <script>
@@ -52,30 +52,38 @@ export default {
           phone: '',
           belongto: '',
           quanx: [],
-          state:''
+          state: "1"
+        },
+        rules: {
+          userId:  { required: true, message: '请输入字母和数字', trigger: 'blur' },
+          pwd:  { required: true, message: '请输入字母和数字', trigger: 'blur' },
+          name:  { required: true, message: '请输入使用者', trigger: 'blur' },
+          phone:  { required: true, message: '请输入数字', trigger: 'blur' },
+          belongto:  { required: true, message: '请输入所属部门', trigger: 'blur' }
         }
       }
     },
     methods: {
-      onSubmit() {
-          if(!this.form.userId||!this.form.pwd||!this.form.name||!this.form.phone||!this.form.belongto||!this.form.state){
-              this.$message.error('有选项为空')
-          }else{
-              let data=JSON.parse(JSON.stringify(this.form))
-        
-        this.$store.dispatch('Addperson',data)
-        .then(res=>{
-        if(res.data.code=0){
-            this,$message.error('该账号已经存在')
-        }else{
-            this.$message.success('添加成功')
-        }
-        })
+      onSubmit(form) {
+        this.$refs[form].validate(valid => {
+          if(valid) {
+            let data=JSON.parse(JSON.stringify(this.form))
+            this.$store.dispatch('Addperson',data)
+              .then(res=>{
+                if(res.data.code=0){
+                  this,$message.error('该账号已经存在')
+                }else{
+                  this.$message.success('添加成功')
+                }
+              })
+          } else {
+            this.$message.error('请填写正确信息');
           }
-          
+        })
       },
-      clear(){
-          this.form={}
+      clear(form){
+        console.log('s')
+          this.$refs[form].resetFields();
       }
     }
 }

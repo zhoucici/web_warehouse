@@ -9,7 +9,9 @@ const service = axios.create({
 })
 // response interceptor
 service.interceptors.response.use(
-  response => response,
+  response => {
+    return Promise.resolve(response.data)
+  },
   error => {
     Message({
       message: error.message,
