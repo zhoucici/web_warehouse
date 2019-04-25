@@ -16,7 +16,7 @@ export function delGoodsById (id) {
     }
   })
 }
-export function addGoods (params) {
+export function addGoodsById (params) {
   return request({
     url: '/add',
     method: 'post',

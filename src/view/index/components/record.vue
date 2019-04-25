@@ -4,21 +4,21 @@
       <el-breadcrumb-item>仓库管理</el-breadcrumb-item>
       <el-breadcrumb-item>出入记录</el-breadcrumb-item>
     </el-breadcrumb>
-    <div class="dt-filter-box">
-      <div class="dt-filter-left">
-        <el-form :inline="true" size="mini">
-          <el-form-item>
-            <el-input size="mini" v-model="searchData.search" placeholder="请输入搜索信息" style="width: 180px;"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button class="dtc-search" @click="search()" type="primary" icon="el-icon-search">搜索</el-button>
-            <el-button class="dtc-search" @click="clearSearch()" type="" icon="el-icon-error">清除搜索</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
+    <div>
+      <el-form :inline="true" size="mini">
+        <el-form-item>
+          <el-input size="mini" v-model="searchData.search" placeholder="请输入搜索信息" style="width: 180px;"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button class="dtc-search" @click="search()" type="primary" icon="el-icon-search">搜索</el-button>
+          <el-button class="dtc-search" @click="clearSearch()" type="" icon="el-icon-error">清除搜索</el-button>
+        </el-form-item>
+        <el-form-item class="add">
+          <el-button type="primary" size="small" @click="addGoods">添加物品</el-button>
+        </el-form-item>
+      </el-form>
     </div>
     <div>
-      <el-button type="primary" size="small" @click="addGoods">添加物品</el-button>
       <el-table
         :data="goodsData.goodsList"
         size="mini"
@@ -32,6 +32,7 @@
               <el-button
                 size="mini"
                 type="primary"
+                class="tablebtn"
                 @click="checkRecord(scope.$index, scope.row.record)">查看</el-button>
             </template>
           </el-table-column>
@@ -41,11 +42,13 @@
               <el-button
                 size="mini"
                 type="primary"
+                class="tablebtn"
                 @click="intoWarehouse(scope.$index, scope.row)">入仓</el-button>
               <el-button
                 v-if="scope.row.nowAmount"
                 size="mini"
                 type="success"
+                class="tablebtn"
                 @click="outWarehouse(scope.$index, scope.row)">出仓</el-button>
             </template>
           </el-table-column>
@@ -54,10 +57,12 @@
               <el-button
                 size="mini"
                 type="primary"
+                class="tablebtn"
                 @click="editGoods(scope.$index, scope.row)">编辑</el-button>
               <el-button
                 size="mini"
                 type="danger"
+                class="tablebtn"
                 @click="delGoods(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -151,22 +156,6 @@ export default {
         controller:  { required: true, message: '请输入管理者', trigger: 'blur' },
         nowAmount:  { required: true, message: '请输入目前库存', trigger: 'blur' }
       }
-      // goodsList: [{
-      //   goodsName: '周次次',
-      //   belongTo: '周次次',
-      //   controller: '周次次',
-      //   record: '周次次',
-      //   nowAmount: 1
-      // },{
-      //   goodsName: '周次次',
-      //   belongTo: '周次次',
-      //   controller: '周次次',
-      //   record: '周次次',
-      //   nowAmount: 0
-      // }],  // 表格数据
-      // currentPage: 1,
-      // pageSize: 10,
-      // total: 100
     }
   },
   created(){
@@ -266,5 +255,8 @@ export default {
     text-align: center;
   }
 }
-
+.add{
+  position: absolute;
+  right: 40px;
+}
 </style>
