@@ -70,10 +70,10 @@ export default {
             let data=JSON.parse(JSON.stringify(this.form))
             this.$store.dispatch('Addperson',data)
               .then(res=>{
-                if(res.data.code=0){
-                  this,$message.error('该账号已经存在')
+                if(res.data.code==0){
+                  this.$message.error(res.data.res_data)
                 }else{
-                  this.$message.success('添加成功')
+                  this.$message.success(res.data.res_data)
                 }
               })
           } else {

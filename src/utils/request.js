@@ -10,7 +10,7 @@ const service = axios.create({
 // response interceptor
 service.interceptors.response.use(
   response => {
-    return Promise.resolve(response.data)
+    return Promise.resolve(response)
   },
   error => {
     Message({

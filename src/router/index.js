@@ -35,12 +35,21 @@ export default new Router({
           component: resolve => require(['../view/index/components/addperson.vue'], resolve)
         },
         {
-          path: '/Stock',
-          component: resolve => require(['../view/index/components/Stock.vue'], resolve)
+          path: '/record',
+          name: 'record',
+          component: resolve => require(['../view/index/components/record.vue'], resolve),
+          children: [
+            {
+              path: ':id',
+              name: 'record',
+              component: resolve => require(['../view/index/components/record.vue'], resolve)
+            }
+          ]
         },
         {
-          path: '/record',
-          component: resolve => require(['../view/index/components/record.vue'], resolve)
+          path: '/Stock',
+          name: 'Stock',
+          component: resolve => require(['../view/index/components/Stock.vue'], resolve),
         }
       ]
     }

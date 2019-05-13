@@ -1,9 +1,10 @@
 import request from '../utils/request'
 
-export function getUserTable (page, text) {
+export function getUserTable (page, text, size) {
   const data = {
     page,
-    text
+    text,
+    size
   }
   return request({
     url: '/usertable',

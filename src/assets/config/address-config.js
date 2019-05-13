@@ -12,7 +12,7 @@ const webUrl = {
         supplier:"/api", 
     },
     test:{
-        supplier:"http://127.0.0.1:3000", 
+        supplier:"http://192.168.43.145:3000", 
     },
     // 线上模式
     online:{

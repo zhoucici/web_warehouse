@@ -1,22 +1,28 @@
 import request from '../utils/request'
 export function getGoods (searchData) {
   return request({
-    url: 'https://www.easy-mock.com/mock/5cb429769e5e43437f720ad8/example/getGoods',
+    url: '/getgoods',
     method: 'post',
     data: searchData
   })
 }
-
+export function outInto (params) {
+  return request({
+    url: '/outin',
+    method: 'post',
+    data: params
+  })
+}
 export function delGoodsById (id) {
   return request({
-    url: '/del',
+    url: '/delgoods',
     method: 'post',
     data: {
       id
     }
   })
 }
-export function addGoodsById (params) {
+export function addGoods (params) {
   return request({
     url: '/add',
     method: 'post',
@@ -25,7 +31,7 @@ export function addGoodsById (params) {
 }
 export function editGoodsById (id, params) {
   return request({
-    url: '/edit',
+    url: '/editgoods',
     method: 'post',
     data: Object.assign({}, id, params)
   })
